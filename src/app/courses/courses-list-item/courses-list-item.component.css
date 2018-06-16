@@ -1,0 +1,13 @@
+:host {
+  padding: 10px;
+}
+
+.courses-list-item__container {
+  background: white;
+  padding: 10px;
+}
+
+.courses-list-item__content-duration {
+  padding-left: 20px;
+}
+

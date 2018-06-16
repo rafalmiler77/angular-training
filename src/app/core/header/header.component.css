@@ -1,0 +1,8 @@
+.header__container {
+  background: #B9C0BD;
+  border-bottom: 1px solid black;
+}
+
+.header__name {
+  padding-right: 2em;
+}
