@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesListItemComponent } from './courses-list-item/courses-list-item.component';
-import { CoursesService } from '../services/courses.service';
-import { DurationPipe } from '../pipe/duration.pipe';
+import { CoursesService } from 'app/services/courses.service';
+import { DurationPipe } from 'app/pipe/duration.pipe';
 
 @NgModule({
   imports: [

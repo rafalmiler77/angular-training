@@ -1,22 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HomeComponent } from './home.component';
 
-import { ToolboxComponent } from './toolbox.component';
-import { FormsModule } from '@angular/forms';
-
-describe('ToolboxComponent', () => {
-  let component: ToolboxComponent;
-  let fixture: ComponentFixture<ToolboxComponent>;
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolboxComponent ],
-      imports: [FormsModule]
+      declarations: [ HomeComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToolboxComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../entities/course.model';
+import { Course } from 'app/entities/course.model';
 
 @Injectable()
 export class CoursesService {

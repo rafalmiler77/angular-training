@@ -10,7 +10,10 @@ export class DurationPipe implements PipeTransform {
     h = h === 0 ? '' : `${h}h`;
     let m: string | number = value % 60;
     m = m === 0 ? '' : `${m} min`;
-    return `${h} ${m}`;
-  }
 
+    if (h === ''){
+      return `${m}`;
+    }
+    return m === '' ? `${h}` : `${h} ${m}`;
+  }
 }

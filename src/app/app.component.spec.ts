@@ -1,27 +1,48 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { UserService } from 'app/services/user.service';
+import { User } from 'app/entities/user.model';
+import { userMock } from 'app/entities/userMock';
+
+class UserServiceMock {
+  public getUser(): User {
+    return userMock;
+  }
+}
+
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        {
+          provide: UserService,
+          useClass: UserServiceMock
+        },
+      ]
     }).compileComponents();
+
   }));
-  fit('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.debugElement.componentInstance;
+  });
+
+  it('should create the app', async(() => {
+    expect(component).toBeTruthy();
   }));
-  xit(`should have as title 'app'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
+
+  it('should initialize with logged user', async(() => {
+    component.ngOnInit();
+    expect(component.user.firstName).toEqual('John');
   }));
-  xit('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
-  }));
+
 });

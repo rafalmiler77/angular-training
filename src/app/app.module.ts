@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { CoreModule } from './core/core.module';
-import { CoursesModule } from './courses/courses.module';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
-// import { DurationPipe } from './pipe/duration.pipe';
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -14,8 +14,9 @@ import { UserService } from './services/user.service';
   ],
   imports: [
     BrowserModule,
-    CoreModule,
-    CoursesModule
+    FormsModule,
+    RouterModule.forRoot(ROUTES),
+    CoreModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
