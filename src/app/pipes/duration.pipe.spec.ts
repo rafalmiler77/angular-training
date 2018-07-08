@@ -11,7 +11,7 @@ describe('DurationPipe', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('transform correctly', () => {
+  it('transform duration time correctly', () => {
     expect(pipe.transform(0)).toBe('');
     expect(pipe.transform(40)).toBe('40 min');
     expect(pipe.transform('40')).toBe('40 min');

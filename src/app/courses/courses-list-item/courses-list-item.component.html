@@ -1,13 +1,14 @@
-<div class="courses-list-item__container">
+<div [appHighlightFresh]="creationDate" class="courses-list-item">
   <div class="row">
     <div class="col-10 courses-list-item__content">
       <div class="row">
         <div class="col-6 courses-list-item__content-title">
-          {{course.title}}
+          {{course.title | uppercase}}
+          <i *appHide="shouldHide" class="fa fa-star" aria-hidden="true"></i>
         </div>
-        <div class="col-6 courses-list-item-details">
-          <span class="float-right courses-list-item__content-duration">{{course.duration | duration}}</span>
-          <span class="float-right courses-list-item__content-date">{{course.creationDate | date}}</span>
+        <div class="col-6 courses-list-item__content-details">
+          <span class="float-right courses-list-item__content-details-duration">{{course.duration | duration}}</span>
+          <span class="float-right courses-list-item__content-details-date">{{course.creationDate | date}}</span>
         </div>
       </div>
       <div class="row">

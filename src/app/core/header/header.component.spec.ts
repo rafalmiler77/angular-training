@@ -35,7 +35,6 @@ describe('HeaderComponent', () => {
     component = hostComponent.testComponent;
 
     nameElement = fixture.debugElement.query(By.css('.header__name'));
-    console.log('nameElement', nameElement)
 
     fixture.detectChanges();
   });

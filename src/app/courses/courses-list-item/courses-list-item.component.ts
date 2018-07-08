@@ -20,6 +20,12 @@ export class CoursesListItemComponent implements OnInit {
 
   ngOnInit() {
   }
+  public get creationDate() {
+    return this.course.creationDate;
+  }
+  public get shouldHide() {
+    return !this.course.topRated;
+  }
   public editCourse(): void {
     this.edited.emit(this.course.id);
   }

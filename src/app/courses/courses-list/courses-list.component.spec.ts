@@ -2,6 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
+import { FilterByPipe } from 'app/pipes';
+import { OrderByPipe } from 'app/pipes/order-by.pipe';
 import { CoursesService } from 'app/services/courses.service';
 import { coursesMock } from 'app/entities/coursesMock';
 import { Course } from 'app/entities/course.model';
@@ -18,10 +20,11 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListComponent ],
+      declarations: [ CoursesListComponent, OrderByPipe ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        { provide: CoursesService, useClass: CoursesServiceMock }
+        { provide: CoursesService, useClass: CoursesServiceMock },
+        { provide: FilterByPipe }
       ]
     })
     .compileComponents();

@@ -1,11 +1,15 @@
 <app-courses-list-item
-  *ngFor="let course of courses"
+  *ngFor="let course of courses | orderBy: 'creationDate'"
   [course]="course"
   (edited)="edited($event)"
   (deleted)="deleted($event)">
 </app-courses-list-item>
 <div class="row more-container">
   <div class="col">
-    <div class="more" (click)="loadMore()">Load more...</div>
+    <div *ngIf="more; else noMore" class="more" (click)="loadMore()">Load more...</div>
   </div>
 </div>
+
+<ng-template #noMore>
+  <div class="more">No data, feel free to add more courses</div>
+</ng-template>

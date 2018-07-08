@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-toolbox',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbox.component.css']
 })
 export class ToolboxComponent implements OnInit {
+  @Output()
+  public search: EventEmitter<string> = new EventEmitter<string>();
 
   public searchTerm = '';
 
@@ -13,7 +15,7 @@ export class ToolboxComponent implements OnInit {
 
   ngOnInit() {
   }
-  public handleClick() {
-    console.log('click', this.searchTerm);
+  public handleSearchClick() {
+    this.search.emit(this.searchTerm);
   }
 }

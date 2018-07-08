@@ -2,10 +2,12 @@ import { Component, ViewChild, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { DurationPipe } from 'app/pipe/duration.pipe';
+import { HighlightFreshDirective } from 'app/directives/highlight-fresh.directive';
+import { DurationPipe } from 'app/pipes/duration.pipe';
 import { CoursesListItemComponent } from './courses-list-item.component';
 import { coursesMock } from 'app/entities/coursesMock';
 import { Course } from 'app/entities/course.model';
+import { HideDirective } from 'app/directives/hide.directive';
 
 @Component({
   selector: 'app-test-host-component',
@@ -36,7 +38,9 @@ describe('CoursesListItemComponent', () => {
       declarations: [
         CoursesListItemComponent,
         TestHostComponent,
-        DurationPipe
+        DurationPipe,
+        HighlightFreshDirective,
+        HideDirective
       ],
     })
     .compileComponents();

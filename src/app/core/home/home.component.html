@@ -1,4 +1,4 @@
 <app-breadcrumbs></app-breadcrumbs>
-<app-toolbox></app-toolbox>
-<app-courses-list></app-courses-list>
+<app-toolbox (search)="handleSearchTerm($event)"></app-toolbox>
+<app-courses-list [searchTerm]="searchTerm"></app-courses-list>
 <app-footer></app-footer>
