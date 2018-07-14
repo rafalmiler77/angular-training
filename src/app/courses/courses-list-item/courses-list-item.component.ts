@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Course } from 'app/entities/course.model';
 
 @Component({
@@ -7,6 +9,8 @@ import { Course } from 'app/entities/course.model';
   styleUrls: ['./courses-list-item.component.css']
 })
 export class CoursesListItemComponent implements OnInit {
+  public modalRef: BsModalRef;
+
   @Input()
   public course: Course;
 
@@ -16,7 +20,7 @@ export class CoursesListItemComponent implements OnInit {
   @Output()
   public deleted: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private modalService: BsModalService) {}
 
   ngOnInit() {
   }
@@ -31,6 +35,10 @@ export class CoursesListItemComponent implements OnInit {
   }
   public deleteCourse(): void {
     this.deleted.emit(this.course.id);
+    this.modalRef.hide();
+  }
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
 }

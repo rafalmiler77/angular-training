@@ -6,8 +6,12 @@
       </div>
     </div>
     <div class="col-4">
-      <span class="float-right header__label">{{getLogLabel}}</span>
-      <span class="float-right header__name">{{getFirstName}}</span>
+      <span
+        class="float-right header__label"
+        (click)="handleLogClick()">
+        {{getLogStatusLabel}}
+      </span>
+      <span class="float-right header__name">{{getEmail}}</span>
     </div>
   </div>
 </div>

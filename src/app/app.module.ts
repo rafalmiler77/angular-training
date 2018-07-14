@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -20,7 +21,7 @@ import { DurationPipe, OrderByPipe, FilterByPipe } from 'app/pipes';
 import { HighlightFreshDirective } from 'app/directives/highlight-fresh.directive';
 import { HideDirective } from 'app/directives/hide.directive';
 
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { CoursesService } from 'app/services/courses.service';
 
 @NgModule({
@@ -44,10 +45,11 @@ import { CoursesService } from 'app/services/courses.service';
     BrowserModule,
     FormsModule,
     Angular2FontawesomeModule,
+    ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
-    UserService,
+    AuthService,
     CoursesService,
     FilterByPipe
   ],

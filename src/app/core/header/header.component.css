@@ -6,3 +6,6 @@
 .header__name {
   padding-right: 2em;
 }
+.header__label {
+  cursor: pointer;
+}

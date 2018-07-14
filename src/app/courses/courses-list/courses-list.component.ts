@@ -21,8 +21,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
-    this.allCourses = this.courses.slice();
+    this.getCoursesList();
   }
   ngOnChanges({searchTerm}: SimpleChanges) {
     const phrase = searchTerm.currentValue;
@@ -30,15 +29,21 @@ export class CoursesListComponent implements OnInit, OnChanges {
       this.courses = this.filterPipe.transform(this.allCourses, phrase);
     }
   }
+  public getCoursesList() {
+    this.courses = this.coursesService.getCourses();
+    this.allCourses = this.courses.slice();
+  }
   public edited(id: number) {
     console.log('clicked editing of course of id:', id);
   }
   public deleted(id: number) {
-    console.log('clicked deleting of course of id:', id);
+    this.coursesService.removeCourse(id);
+    this.getCoursesList();
   }
   public loadMore() {
     console.log('clicked loading more');
   }
+
   public get more(): boolean {
     return this.courses.length > 0;
   }

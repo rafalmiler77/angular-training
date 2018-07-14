@@ -1,3 +1,26 @@
-<p>
-  login works!
-</p>
+<article class="col-md-6 col-md-offset-3">
+  <div class="title">
+    <h4 class="">Login</h4>
+  </div>
+
+  <div class="">
+    <form name="form" (ngSubmit)="handleLoginClick()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="password" required />
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <hr />
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="handleLoginClick()">Login
+    </button>
+  </div>
+</article>

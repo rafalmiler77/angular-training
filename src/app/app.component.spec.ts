@@ -1,11 +1,11 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { UserService } from 'app/services/user.service';
+import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/entities/user.model';
 import { userMock } from 'app/entities/userMock';
 
-class UserServiceMock {
+class AuthServiceMock {
   public getUser(): User {
     return userMock;
   }
@@ -23,8 +23,8 @@ describe('AppComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {
-          provide: UserService,
-          useClass: UserServiceMock
+          provide: AuthService,
+          useClass: AuthServiceMock
         },
       ]
     }).compileComponents();

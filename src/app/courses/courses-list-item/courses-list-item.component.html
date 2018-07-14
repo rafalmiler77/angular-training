@@ -25,9 +25,34 @@
       </div>
       <div
         class="btn btn-danger float-right courses-list-item__delete"
-        (click)="deleteCourse()">
+        (click)="openModal(template)">
           Delete
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Do you really want to delete "{{course.title}}" course?
+  </div>
+  <div class="modal-footer">
+    <hr />
+    <button
+      type="button"
+      class="btn btn-secondary confirm-modal-button confirm-modal-button__cancel"
+      (click)="modalRef.hide()">Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary confirm-modal-button confirm-modal-button__confirm"
+      (click)="deleteCourse()">Confirm
+    </button>
+  </div>
+</ng-template>
