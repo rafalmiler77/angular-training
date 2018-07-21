@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Course } from 'app/entities/course.model';
 
 @Component({
   selector: 'app-courses-list-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './courses-list-item.component.html',
   styleUrls: ['./courses-list-item.component.css']
 })

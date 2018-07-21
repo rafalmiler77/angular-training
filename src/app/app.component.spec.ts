@@ -9,6 +9,9 @@ class AuthServiceMock {
   public getUser(): User {
     return userMock;
   }
+  public isAuthenticated(): boolean {
+    return false;
+  }
 }
 
 describe('AppComponent', () => {

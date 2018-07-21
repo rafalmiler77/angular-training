@@ -8,6 +8,7 @@ import { CoursesListItemComponent } from './courses-list-item.component';
 import { coursesMock } from 'app/entities/coursesMock';
 import { Course } from 'app/entities/course.model';
 import { HideDirective } from 'app/directives/hide.directive';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-test-host-component',
@@ -33,6 +34,8 @@ describe('CoursesListItemComponent', () => {
   let component: CoursesListItemComponent;
   let editButton: DebugElement;
 
+  const modalServiceMock: BsModalService = jasmine.createSpyObj('BsModalService', ['show']);
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -42,6 +45,9 @@ describe('CoursesListItemComponent', () => {
         HighlightFreshDirective,
         HideDirective
       ],
+      providers: [
+        { provide: BsModalService, useValue: modalServiceMock }
+      ]
     })
     .compileComponents();
   }));

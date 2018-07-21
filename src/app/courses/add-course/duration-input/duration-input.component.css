@@ -1,0 +1,10 @@
+label {
+  display: block;
+}
+input {
+  width: 50%;
+  display: inline-block;
+}
+span {
+  padding-left: 10px;
+}

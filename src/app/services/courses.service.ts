@@ -64,6 +64,7 @@ public courses: Course[] = [
   public createCourse({...props}): void {
     props.id = this.createNewId();
     const newCourse = new CourseClass(props);
+    console.log('newCourse created', newCourse)
     this.courses = [...this.courses, newCourse];
   }
 

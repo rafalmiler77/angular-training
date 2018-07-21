@@ -14,8 +14,13 @@ import { ToolboxComponent } from 'app/core/toolbox/toolbox.component';
 import { FooterComponent } from 'app/core/footer/footer.component';
 import { LoginComponent } from 'app/core/login/login.component';
 import { HomeComponent } from 'app/core/home/home.component';
-import { CoursesListComponent } from 'app/courses/courses-list/courses-list.component';
-import { CoursesListItemComponent } from 'app/courses/courses-list-item/courses-list-item.component';
+import {
+  AddCourseComponent,
+  CoursesListComponent,
+  CoursesListItemComponent,
+  DateInputComponent,
+  DurationInputComponent
+ } from 'app/courses';
 
 import { DurationPipe, OrderByPipe, FilterByPipe } from 'app/pipes';
 import { HighlightFreshDirective } from 'app/directives/highlight-fresh.directive';
@@ -39,7 +44,10 @@ import { CoursesService } from 'app/services/courses.service';
     HighlightFreshDirective,
     DurationPipe,
     FilterByPipe,
-    OrderByPipe
+    OrderByPipe,
+    AddCourseComponent,
+    DateInputComponent,
+    DurationInputComponent
   ],
   imports: [
     BrowserModule,

@@ -2,14 +2,18 @@
   <div class="row">
     <div class="col-7">
       <input placeholder="search by title" [(ngModel)]="searchTerm"/>
-      <div
+      <button
         class="btn btn-primary"
         (click)="handleSearchClick()">
           Search
-      </div>
+      </button>
     </div>
     <div class="col-5">
-      <div class="btn btn-primary float-right">Add course</div>
+      <button
+        class="btn btn-primary float-right"
+        routerLink="/add-course">
+          Add course
+      </button>
     </div>
   </div>
 </div>

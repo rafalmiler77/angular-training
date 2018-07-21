@@ -1,0 +1,5 @@
+<div class="form-group">
+  <label for="duration">Duration</label>
+  <input type="number" class="form-control" name="duration" #durationInput (keyup)="onKey(durationInput.value)" required />
+  <span>{{durationInput.value | duration}}</span>
+</div>
