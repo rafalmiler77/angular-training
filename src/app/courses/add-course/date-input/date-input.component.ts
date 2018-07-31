@@ -12,5 +12,8 @@ export class DateInputComponent {
   public get dateObj(): Date {
     return new Date(this.date);
   }
+  public set setDate(date) {
+    this.date = date;
+  }
 
 }

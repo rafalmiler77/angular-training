@@ -2,8 +2,18 @@
   padding: 10px;
 }
 
-.breadcrumbs-container {
+.breadcrumbs {
   background: white;
   padding: 10px;
+}
+.breadcrumbs__item-name {
+  text-transform: capitalize;
+}
+.breadcrumbs__item-name:first-of-type {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.breadcrumbs__item-divider:last-child {
+  display: none;
 }
 

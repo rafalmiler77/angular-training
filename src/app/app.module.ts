@@ -19,15 +19,18 @@ import {
   CoursesListComponent,
   CoursesListItemComponent,
   DateInputComponent,
-  DurationInputComponent
+  DurationInputComponent,
+  EditCourseComponent
  } from 'app/courses';
 
 import { DurationPipe, OrderByPipe, FilterByPipe } from 'app/pipes';
 import { HighlightFreshDirective } from 'app/directives/highlight-fresh.directive';
 import { HideDirective } from 'app/directives/hide.directive';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from 'app/services/auth.service';
+import { AuthGuard } from 'app/services/auth.guard.service';
 import { CoursesService } from 'app/services/courses.service';
+import { NotFoundComponent } from 'app/core/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { CoursesService } from 'app/services/courses.service';
     BreadcrumbsComponent,
     CoursesListComponent,
     CoursesListItemComponent,
+    EditCourseComponent,
     FooterComponent,
     HeaderComponent,
     HomeComponent,
@@ -47,7 +51,8 @@ import { CoursesService } from 'app/services/courses.service';
     OrderByPipe,
     AddCourseComponent,
     DateInputComponent,
-    DurationInputComponent
+    DurationInputComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,7 @@ import { CoursesService } from 'app/services/courses.service';
   ],
   providers: [
     AuthService,
+    AuthGuard,
     CoursesService,
     FilterByPipe
   ],

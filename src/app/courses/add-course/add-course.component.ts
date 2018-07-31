@@ -31,14 +31,14 @@ export class AddCourseComponent {
       creationDate,
       duration: this.duration
     });
-    this.router.navigate(['/home']);
+    this.router.navigate(['/courses']);
   }
   public durationChanged(value): void {
     this.duration = value;
   }
   public handleCancelClick() {
     console.log('handleCancelClick');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/courses']);
   }
 
 }

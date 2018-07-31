@@ -1,7 +1,10 @@
-<div class="breadcrumbs-container">
+<div class="breadcrumbs">
   <div class="row">
-    <div class="col">
-      Courses
+    <div class="col breadcrumbs__item">
+      <ng-container *ngFor="let breadcrumb of breadcrumbs">
+        <span (click)="handleClick(breadcrumb)" class="breadcrumbs__item-name">{{breadcrumb}}</span>
+        <span class="breadcrumbs__item-divider"> >> </span>
+      </ng-container>
     </div>
   </div>
 </div>

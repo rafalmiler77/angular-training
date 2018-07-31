@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Course, CourseClass } from 'app/entities/course.model';
 import { getPastDate, getFutureDate } from 'app/helpers/helpers';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+
 @Injectable()
 export class CoursesService {
 public courses: Course[] = [
@@ -57,8 +60,9 @@ public courses: Course[] = [
     return this.courses;
   }
 
-  public getCourse(courseId: number): Course {
-    return this.courses.find((course) => course.id === courseId);
+  public getCourse(courseId: number): Observable<Course> {
+    const result = this.courses.find((course) => course.id === courseId);
+    return Observable.of(result);
   }
 
   public createCourse({...props}): void {
@@ -69,7 +73,7 @@ public courses: Course[] = [
   }
 
   public updateCourse({id, ...props}): void {
-    const currentCourse = this.getCourse(id);
+    const currentCourse = this.findCourse(id);
     Object.keys(props).map(prop => {
       if (currentCourse.hasOwnProperty(prop) ) {
         currentCourse[prop] = props[prop];
@@ -79,6 +83,10 @@ public courses: Course[] = [
 
   public removeCourse(courseId): void {
     this.courses = this.courses.filter((course) => course.id !== courseId);
+  }
+
+  private findCourse(courseId: number): Course {
+    return this.courses.find((course) => course.id === courseId);
   }
 
   private createNewId(): number {

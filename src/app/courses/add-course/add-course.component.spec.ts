@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 
 class CoursesServiceMock {
   public createCourse() {
-
   }
 }
 

@@ -9,3 +9,6 @@
 .header__label {
   cursor: pointer;
 }
+.header__logo {
+  cursor: pointer;
+}

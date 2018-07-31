@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { CoursesService } from 'app/services/courses.service';
 import { Course } from 'app/entities/course.model';
 import { FilterByPipe } from 'app/pipes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list',
@@ -17,6 +18,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
 
   constructor(
     private coursesService: CoursesService,
+    private router: Router,
     private filterPipe: FilterByPipe
   ) { }
 
@@ -35,6 +37,7 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
   public edited(id: number) {
     console.log('clicked editing of course of id:', id);
+    this.router.navigate([`/courses/${id}`]);
   }
   public deleted(id: number) {
     this.coursesService.removeCourse(id);
