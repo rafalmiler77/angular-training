@@ -13,7 +13,7 @@ describe('OrderByPipe', () => {
   });
 
   it('transform courses correctly', () => {
-    const result = pipe.transform(coursesMock, 'creationDate');
-    expect(result[0].id).toBe(2);
+    const result = pipe.transform(coursesMock, 'date');
+    expect(result[0].id).toBe(3);
   });
 });

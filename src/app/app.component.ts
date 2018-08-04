@@ -21,15 +21,19 @@ export class AppComponent implements OnInit {
   }
 
   private getUser() {
-    this.user = this.authService.getUser();
+    this.authService.getUser()
+      .subscribe((userDetails) => {
+        this.user = userDetails;
+      });
   }
 
   public loggedOut() {
-    this.authService.logout();
+    this.user = null;
     this.isAuthenticated = false;
-    this.getUser();
+    this.authService.logout();
   }
-  public newLoginTried() {
+
+  public newLoginSuccess() {
     this.isAuthenticated = true;
     this.getUser();
   }

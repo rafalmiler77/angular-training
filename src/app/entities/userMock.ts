@@ -1,9 +1,12 @@
 import { User } from './user.model';
 
 export const userMock: User = {
-  token: '1',
-  email: 'john@o2.pl',
+  id: 7779088,
+  fakeToken: 'someToken',
+  login: 'johnny',
   password: 'xxx',
-  firstName: 'John',
-  lastName: 'Smith',
+  name: {
+    first: 'John',
+    last: 'Smith'
+  }
 };

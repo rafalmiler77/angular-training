@@ -6,8 +6,8 @@
   <div class="">
     <form name="form" (ngSubmit)="handleLoginClick()">
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" name="email" [(ngModel)]="email" required />
+        <label for="login">Login</label>
+        <input type="text" class="form-control" name="login" [(ngModel)]="login" required />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -22,5 +22,8 @@
       class="btn btn-secondary"
       (click)="handleLoginClick()">Login
     </button>
+  </div>
+  <div>
+    You can use login "Olsen" and password "in".
   </div>
 </article>

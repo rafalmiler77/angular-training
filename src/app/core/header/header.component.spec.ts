@@ -47,8 +47,8 @@ describe('HeaderComponent', () => {
   it('should show name if logged', () => {
     hostComponent.user = userMock;
     fixture.detectChanges();
-    expect(component.user.email).toBe('john@o2.pl');
-    expect(nameElement.nativeElement.innerText).toBe('john@o2.pl');
+    expect(component.user.login).toBe('johnny');
+    expect(nameElement.nativeElement.innerText).toBe('johnny');
   });
 
   it('should show name if not logged', () => {

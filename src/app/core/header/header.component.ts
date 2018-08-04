@@ -13,25 +13,16 @@ export class HeaderComponent {
   @Output()
   public logout: EventEmitter<any> = new EventEmitter();
 
-  public get getLogStatusLabel() {
-    return this.user === null
-      ? 'Log in'
-      : 'Logout';
+  public get notLogged() {
+    return this.user === null || this.user === undefined;
   }
+
   public handleLogClick(): void {
-    this.user === null
-      ? this.handleLogin()
-      : this.handleLogout();
-  }
-  public get getEmail() {
-    return this.user === null
-      ? ''
-      : this.user.email;
-  }
-  public handleLogin() {
-    console.log('login clicked, should change to login page in future');
-  }
-  public handleLogout() {
     this.logout.emit();
+  }
+  public get getLogin() {
+    return this.notLogged
+      ? ''
+      : this.user.login;
   }
 }

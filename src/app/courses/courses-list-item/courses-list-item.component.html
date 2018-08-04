@@ -1,14 +1,14 @@
-<div [appHighlightFresh]="creationDate" class="courses-list-item">
+<div [appHighlightFresh]="date" class="courses-list-item">
   <div class="row">
     <div class="col-10 courses-list-item__content">
       <div class="row">
         <div class="col-6 courses-list-item__content-title">
-          {{course.title | uppercase}}
+          {{course.name | uppercase}}
           <i *appHide="shouldHide" class="fa fa-star" aria-hidden="true"></i>
         </div>
         <div class="col-6 courses-list-item__content-details">
-          <span class="float-right courses-list-item__content-details-duration">{{course.duration | duration}}</span>
-          <span class="float-right courses-list-item__content-details-date">{{course.creationDate | date}}</span>
+          <span class="float-right courses-list-item__content-details-duration">{{course.length | duration}}</span>
+          <span class="float-right courses-list-item__content-details-date">{{course.date | date}}</span>
         </div>
       </div>
       <div class="row">
@@ -40,7 +40,7 @@
     </button>
   </div>
   <div class="modal-body">
-    Do you really want to delete "{{course.title}}" course?
+    Do you really want to delete "{{course.name}}" course?
   </div>
   <div class="modal-footer">
     <hr />

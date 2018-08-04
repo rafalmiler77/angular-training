@@ -3,11 +3,11 @@ import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/entities/user.model';
-import { userMock } from 'app/entities/userMock';
+import { Observable } from 'rxjs/Observable';
 
 class AuthServiceMock {
-  public getUser(): User {
-    return userMock;
+  public getUser(): Observable<User> {
+    return Observable.of(null);
   }
   public isAuthenticated(): boolean {
     return false;
@@ -43,9 +43,9 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('should initialize with logged user', async(() => {
+  it('should initialize with not logged user', async(() => {
     component.ngOnInit();
-    expect(component.user.firstName).toEqual('John');
+    expect(component.user).toEqual(null);
   }));
 
 });

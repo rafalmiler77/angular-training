@@ -1,19 +1,19 @@
 export interface Course {
   id: number;
-  title: string;
-  creationDate: Date;
-  duration: number;
+  name: string;
+  date: Date;
+  length: number;
   description: string;
-  topRated: boolean;
+  isTopRated: boolean;
 }
 
 export class CourseClass implements Course {
   public id: number;
-  public title = '';
-  public creationDate: Date = new Date();
-  public duration = 0;
+  public name = '';
+  public date: Date = new Date();
+  public length = 0;
   public description = '';
-  public topRated = false;
+  public isTopRated = false;
 
   constructor(properties: any) {
     Object.assign(this, properties);

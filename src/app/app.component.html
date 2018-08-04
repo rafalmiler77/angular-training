@@ -1,5 +1,5 @@
 <app-header [user]="user" (logout)="loggedOut()"></app-header>
-<app-login *ngIf="!isAuthenticated" (newLoginTry)="newLoginTried()"></app-login>
+<app-login *ngIf="!isAuthenticated" (newLoginSuccess)="newLoginSuccess()"></app-login>
 <div *ngIf="isAuthenticated" class="container app-content">
   <router-outlet></router-outlet>
 </div>

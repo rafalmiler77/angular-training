@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { RouterModule } from '@angular/router';
@@ -31,6 +32,7 @@ import { AuthService } from 'app/services/auth.service';
 import { AuthGuard } from 'app/services/auth.guard.service';
 import { CoursesService } from 'app/services/courses.service';
 import { NotFoundComponent } from 'app/core/not-found/not-found.component';
+import { AuthInterceptor } from 'app/services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { NotFoundComponent } from 'app/core/not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     Angular2FontawesomeModule,
     ModalModule.forRoot(),
@@ -63,9 +66,12 @@ import { NotFoundComponent } from 'app/core/not-found/not-found.component';
   ],
   providers: [
     AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
     CoursesService,
-    FilterByPipe
+    FilterByPipe,
+    OrderByPipe,
+    DurationPipe
   ],
   bootstrap: [AppComponent]
 })

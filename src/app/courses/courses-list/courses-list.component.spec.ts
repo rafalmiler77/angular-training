@@ -1,17 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs/Observable';
 
 import { CoursesListComponent } from './courses-list.component';
-import { FilterByPipe } from 'app/pipes';
-import { OrderByPipe } from 'app/pipes/order-by.pipe';
+import { OrderByPipe } from 'app/pipes';
 import { CoursesService } from 'app/services/courses.service';
 import { coursesMock } from 'app/entities/coursesMock';
 import { Course } from 'app/entities/course.model';
 
 class CoursesServiceMock {
-  public getCourses(): Course[] {
-    return coursesMock;
+  public getCourses(): Observable<Course[]> {
+    return Observable.of(coursesMock);
   }
 }
 
@@ -28,7 +28,7 @@ describe('CoursesListComponent', () => {
       providers: [
         { provide: CoursesService, useClass: CoursesServiceMock },
         { provide: Router, useValue: routerStub },
-        { provide: FilterByPipe }
+        { provide: OrderByPipe }
       ]
     })
     .compileComponents();

@@ -1,50 +1,73 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CoursesService } from 'app/services/courses.service';
-import { Course } from 'app/entities/course.model';
-import { FilterByPipe } from 'app/pipes';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { CoursesService } from 'app/services/courses.service';
+import { OrderByPipe } from 'app/pipes';
+import { Course } from 'app/entities/course.model';
 
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.css']
 })
-export class CoursesListComponent implements OnInit, OnChanges {
+export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   public searchTerm: string;
 
   public courses: Course[] = [];
-  public allCourses: Course[] = [];
+  public start = 0;
+  public count = 5;
+  private subscriptons: Subscription[] = [];
 
   constructor(
     private coursesService: CoursesService,
     private router: Router,
-    private filterPipe: FilterByPipe
+    private orderByPipe: OrderByPipe
   ) { }
 
   ngOnInit() {
     this.getCoursesList();
   }
+
   ngOnChanges({searchTerm}: SimpleChanges) {
     const phrase = searchTerm.currentValue;
     if (phrase !== undefined) {
-      this.courses = this.filterPipe.transform(this.allCourses, phrase);
+      this.searchInCourses(phrase);
     }
   }
-  public getCoursesList() {
-    this.courses = this.coursesService.getCourses();
-    this.allCourses = this.courses.slice();
+  ngOnDestroy() {
+    this.subscriptons.forEach(sub => sub.unsubscribe());
+  }
+  public getCoursesList(): void {
+    const coursesSubscription = this.coursesService.getCourses(this.start, this.count)
+    .subscribe((courses) => {
+      this.courses = courses;
+    });
+    this.subscriptons.push(coursesSubscription);
+  }
+  public searchInCourses(textFragment: string): void {
+    const searchSubscription = this.coursesService.searchInCourses(textFragment)
+    .subscribe((courses) => {
+      this.courses = courses;
+    });
+    this.subscriptons.push(searchSubscription);
   }
   public edited(id: number) {
-    console.log('clicked editing of course of id:', id);
     this.router.navigate([`/courses/${id}`]);
   }
   public deleted(id: number) {
-    this.coursesService.removeCourse(id);
-    this.getCoursesList();
+    this.coursesService.removeCourse(id).subscribe(courses => {
+      this.courses = courses;
+    });
   }
   public loadMore() {
     console.log('clicked loading more');
+    this.start += 5;
+    const loadMoreSubscription = this.coursesService.getCourses(this.start, this.count)
+    .subscribe((courses) => {
+      this.courses = this.courses.concat(courses);
+    });
+    this.subscriptons.push(loadMoreSubscription);
   }
 
   public get more(): boolean {

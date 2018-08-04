@@ -1,17 +1,25 @@
+export interface Name {
+  first: string;
+  last: string;
+}
 export interface User {
-  token: string;
-  email: string;
+  id: number;
+  fakeToken: string;
+  login: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
+  name: Name;
+}
+export interface UserCredentials {
+  login: string;
+  password: string;
 }
 
 export class UserClass implements User {
-  public token = '3';
-  public email;
+  public id = 3988686;
+  public fakeToken = '3jgtdghd';
+  public login;
   public password;
-  public firstName = '';
-  public lastName = '';
+  public name = {first: '', last: ''};
 
   constructor(properties: any) {
     Object.assign(this, properties);

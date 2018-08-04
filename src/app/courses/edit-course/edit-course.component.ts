@@ -14,10 +14,10 @@ export class EditCourseComponent implements OnInit, OnDestroy {
 
   public courseId: number;
   public course: Course;
-  public title = '';
+  public name = '';
   public description = '';
-  public creationDate;
-  public duration;
+  public date;
+  public length;
   public authors = '';
   private subscription: Subscription;
 
@@ -29,15 +29,16 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit() {
-    this.activatedRoute.params.subscribe((data) => {
+    this.activatedRoute.params.subscribe((data): void => {
       this.courseId = +data.id;
       this.subscription = this.coursesService.getCourse(this.courseId)
-        .subscribe((courseDetails: Course) => {
-          this.course = courseDetails;
-          this.title = courseDetails.title;
-          this.description = courseDetails.description;
-          this.creationDate = courseDetails.creationDate;
-          this.duration = courseDetails.duration;
+        .subscribe((courseDetails: Course[]): void => {
+          const [details] = courseDetails;
+          this.course = details;
+          this.name = details.name;
+          this.description = details.description;
+          this.date = details.date;
+          this.length = details.length;
         });
     });
   }
@@ -48,12 +49,13 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   public handleSubmitClick(): void {
     this.coursesService.updateCourse({
       id: this.courseId,
-      title: this.title,
+      name: this.name,
       description: this.description,
-      creationDate: this.creationDate,
-      duration: this.duration
+      date: this.date,
+      length: this.length
+    }).subscribe((res) => {
+      this.router.navigate(['/courses']);
     });
-    this.router.navigate(['/courses']);
   }
 
   public handleCancelClick() {

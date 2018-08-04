@@ -12,9 +12,9 @@ export class AddCourseComponent {
   @ViewChild(DateInputComponent)
   private dateInputComponent: DateInputComponent;
 
-  public title = '';
+  public name = '';
   public description = '';
-  public duration = '';
+  public length = '';
   public authors = '';
 
   constructor(
@@ -23,18 +23,20 @@ export class AddCourseComponent {
   ) { }
 
   public handleSubmitClick(): void {
-    const creationDate = this.dateInputComponent.dateObj;
+    const date = this.dateInputComponent.dateObj;
 
     this.coursesService.createCourse({
-      title: this.title,
+      name: this.name,
       description: this.description,
-      creationDate,
-      duration: this.duration
+      date,
+      length: this.length
+    }).subscribe((res) => {
+      console.log(res);
+      this.router.navigate(['/courses']);
     });
-    this.router.navigate(['/courses']);
   }
   public durationChanged(value): void {
-    this.duration = value;
+    this.length = value;
   }
   public handleCancelClick() {
     console.log('handleCancelClick');

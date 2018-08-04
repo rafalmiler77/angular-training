@@ -8,10 +8,11 @@
     <div class="col-4">
       <span
         class="float-right header__label"
+        [ngClass]="{'header__label-hidden': notLogged}"
         (click)="handleLogClick()">
-        {{getLogStatusLabel}}
+          Logout
       </span>
-      <span class="float-right header__name">{{getEmail}}</span>
+      <span class="float-right header__name">{{getLogin}}</span>
     </div>
   </div>
 </div>

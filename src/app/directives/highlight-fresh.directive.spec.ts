@@ -5,10 +5,10 @@ import { getPastDate, getFutureDate } from 'app/helpers/helpers';
 import { HighlightFreshDirective } from './highlight-fresh.directive';
 
 @Component({
-  template: `<div [appHighlightFresh]="creationDate">something</div>`
+  template: `<div [appHighlightFresh]="date">something</div>`
 })
 class TestHighlightComponent {
-  public creationDate: Date;
+  public date: Date;
 }
 
 describe('Directive: HighlightFreshDirective', () => {
@@ -27,12 +27,12 @@ describe('Directive: HighlightFreshDirective', () => {
   });
 
   it('should show green border', () => {
-    component.creationDate = getPastDate(5);
+    component.date = getPastDate(5);
     fixture.detectChanges();
     expect(el.nativeElement.style.border).toBe('2px solid green');
   });
   it('should show blue border', () => {
-    component.creationDate = getFutureDate(5);
+    component.date = getFutureDate(5);
     fixture.detectChanges();
     expect(el.nativeElement.style.border).toBe('2px solid blue');
   });

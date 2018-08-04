@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
-import { UserClass } from '../../entities/user.model';
 
 @Component({
   selector: 'app-login',
@@ -9,21 +9,26 @@ import { UserClass } from '../../entities/user.model';
 })
 export class LoginComponent implements OnInit {
   @Output()
-  public newLoginTry: EventEmitter<any> = new EventEmitter();
+  public newLoginSuccess: EventEmitter<any> = new EventEmitter();
 
-  public email = '';
+  public login = '';
   public password = '';
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
   }
   public handleLoginClick() {
-    console.log('login credentials saved to localstorage', this.email, this.password);
-    const user = new UserClass({token: '3', email: this.email, password: this.password})
-    this.authService.login(user);
-    this.newLoginTry.emit();
+    const user = { login: this.login, password: this.password};
+    this.authService.login(user).subscribe((res) => {
+      if (res && res.token) {
+        this.authService.saveToken(res.token);
+        this.newLoginSuccess.emit();
+        this.router.navigate(['/courses']);
+      }
+    });
   }
 }

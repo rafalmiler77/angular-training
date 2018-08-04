@@ -9,6 +9,9 @@
 .header__label {
   cursor: pointer;
 }
+.header__label-hidden {
+  display: none;
+}
 .header__logo {
   cursor: pointer;
 }

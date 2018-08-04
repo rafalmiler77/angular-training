@@ -13,14 +13,16 @@ import { Course } from 'app/entities/course.model';
 import { coursesMock } from 'app/entities/coursesMock';
 
 class CoursesServiceMock {
-  public updateCourse() { }
-  public getCourse(): Observable<Course> {
-    return Observable.of(coursesMock[0]);
+  public getCourse(): Observable<Course[]> {
+    return Observable.of(coursesMock.splice(1, coursesMock.length));
+   }
+  public updateCourse(): Observable<Course> {
+    return Observable.of(coursesMock[1]);
    }
 }
 
 class ActivatedRouteStub {
-  public params = Observable.of({ id: '' });
+  public params = Observable.of({ id: '1' });
 }
 
 describe('EditCourseComponent', () => {
