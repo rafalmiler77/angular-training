@@ -45,7 +45,7 @@ describe('AppComponent', () => {
 
   it('should initialize with not logged user', async(() => {
     component.ngOnInit();
-    expect(component.user).toEqual(null);
+    expect(component.user).toEqual(undefined);
   }));
 
 });

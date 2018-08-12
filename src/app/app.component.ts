@@ -16,25 +16,16 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getUser();
     this.isAuthenticated = this.authService.isAuthenticated();
-  }
-
-  private getUser() {
-    this.authService.getUser()
-      .subscribe((userDetails) => {
-        this.user = userDetails;
-      });
   }
 
   public loggedOut() {
     this.user = null;
-    this.isAuthenticated = false;
     this.authService.logout();
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   public newLoginSuccess() {
     this.isAuthenticated = true;
-    this.getUser();
   }
 }

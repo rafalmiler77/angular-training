@@ -9,10 +9,10 @@
       <span
         class="float-right header__label"
         [ngClass]="{'header__label-hidden': notLogged}"
-        (click)="handleLogClick()">
+        (click)="handleLogoutClick()">
           Logout
       </span>
-      <span class="float-right header__name">{{getLogin}}</span>
+      <span class="float-right header__name">{{userLogin}}</span>
     </div>
   </div>
 </div>

@@ -29,6 +29,7 @@ import { HighlightFreshDirective } from 'app/directives/highlight-fresh.directiv
 import { HideDirective } from 'app/directives/hide.directive';
 
 import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
 import { AuthGuard } from 'app/services/auth.guard.service';
 import { CoursesService } from 'app/services/courses.service';
 import { NotFoundComponent } from 'app/core/not-found/not-found.component';
@@ -66,6 +67,7 @@ import { AuthInterceptor } from 'app/services/auth.interceptor';
   ],
   providers: [
     AuthService,
+    UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
     CoursesService,

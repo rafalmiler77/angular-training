@@ -1,12 +1,10 @@
 <div class="toolbox-container">
   <div class="row">
     <div class="col-7">
-      <input placeholder="search by title" [(ngModel)]="searchTerm"/>
-      <button
-        class="btn btn-primary"
-        (click)="handleSearchClick()">
-          Search
-      </button>
+      <input #searchTerm
+      type="text"
+      placeholder='search by title or description'
+      (keyup)="searchTermChange(searchTerm.value)"/>
     </div>
     <div class="col-5">
       <button

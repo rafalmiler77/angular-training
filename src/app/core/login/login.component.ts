@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
   ) { }
 
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
       if (res && res.token) {
         this.authService.saveToken(res.token);
         this.newLoginSuccess.emit();
+        this.userService.getUser();
         this.router.navigate(['/courses']);
       }
     });
