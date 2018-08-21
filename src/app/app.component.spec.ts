@@ -1,11 +1,11 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
 import { User } from 'app/entities/user.model';
 import { Observable } from 'rxjs/Observable';
 
-class AuthServiceMock {
+class UserServiceMock {
   public getUser(): Observable<User> {
     return Observable.of(null);
   }
@@ -26,8 +26,8 @@ describe('AppComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {
-          provide: AuthService,
-          useClass: AuthServiceMock
+          provide: UserService,
+          useClass: UserServiceMock
         },
       ]
     }).compileComponents();

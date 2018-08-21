@@ -2,15 +2,15 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
-import { UserService } from 'app/services/user.service';
+import { Store } from '@ngrx/store';
 import { HeaderComponent } from './header.component';
-import { userMock } from 'app/entities/userMock';
-import { User } from 'app/entities/user.model';
-import { Subject } from 'rxjs/Subject';
 
-class UserServiceMock {
-  public newUserSubject(): Subject<User> {
-    return new Subject<User>();
+class StoreMock {
+  public dispatch(_: any): void {
+    return;
+  }
+  public subscribe(_: any): Observable<any> {
+    return Observable.of();
   }
 }
 
@@ -23,10 +23,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       providers: [
-        {
-          provide: UserService,
-          useClass: UserServiceMock
-        },
+        { provide: Store, useClass: StoreMock }
       ]
     })
     .compileComponents();
@@ -42,7 +39,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });

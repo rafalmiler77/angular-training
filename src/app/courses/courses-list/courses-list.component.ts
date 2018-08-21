@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import { CoursesService } from 'app/services/courses.service';
+import { AppState } from 'app/store';
 import { OrderByPipe } from 'app/pipes';
 import { Course } from 'app/entities/course.model';
+import { GetCourses, LoadMoreCourses } from 'app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-courses-list',
@@ -21,12 +24,14 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private coursesService: CoursesService,
+    private store: Store<AppState>,
     private router: Router,
     private orderByPipe: OrderByPipe
   ) { }
 
   ngOnInit() {
-    this.getCoursesList();
+    this.storeCoursesList();
+    this.getStoredCoursesList();
   }
 
   ngOnChanges({searchTerm}: SimpleChanges) {
@@ -38,17 +43,24 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this.subscriptons.forEach(sub => sub.unsubscribe());
   }
-  public getCoursesList(): void {
+  public storeCoursesList(): void {
     const coursesSubscription = this.coursesService.getCourses(this.start, this.count)
     .subscribe((courses) => {
-      this.courses = courses;
+      this.store.dispatch(new GetCourses(courses));
     });
     this.subscriptons.push(coursesSubscription);
+  }
+  public getStoredCoursesList(): void {
+    const storeSubscription = this.store
+    .subscribe((appState) => {
+      this.courses = appState.courses.courses;
+    });
+    this.subscriptons.push(storeSubscription);
   }
   public searchInCourses(textFragment: string): void {
     const searchSubscription = this.coursesService.searchInCourses(textFragment)
     .subscribe((courses) => {
-      this.courses = courses;
+      this.store.dispatch(new GetCourses(courses));
     });
     this.subscriptons.push(searchSubscription);
   }
@@ -57,15 +69,14 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   }
   public deleted(id: number) {
     this.coursesService.removeCourse(id).subscribe(courses => {
-      this.courses = courses;
+      this.store.dispatch(new GetCourses(courses));
     });
   }
   public loadMore() {
-    console.log('clicked loading more');
     this.start += 5;
     const loadMoreSubscription = this.coursesService.getCourses(this.start, this.count)
     .subscribe((courses) => {
-      this.courses = this.courses.concat(courses);
+      this.store.dispatch(new LoadMoreCourses(courses));
     });
     this.subscriptons.push(loadMoreSubscription);
   }

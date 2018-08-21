@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { AuthService } from 'app/services/auth.service';
+import { UserService } from './user.service';
 import { AuthGuard } from './auth.guard.service';
 
-class AuthServiceMock {
+class UserServiceMock {
   public isAuthenticated(): boolean {
     return false;
   }
@@ -13,8 +13,8 @@ describe('AuthGuardService', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: AuthService,
-          useClass: AuthServiceMock
+          provide: UserService,
+          useClass: UserServiceMock
         },
         AuthGuard
       ]

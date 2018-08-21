@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { UserService } from 'app/services/user.service';
-import { User } from 'app/entities/user.model';
+import { Store } from '@ngrx/store';
+import { LoginData } from 'app/store/reducers/auth.reducer';
+import { AppState } from 'app/store';
 
 @Component({
   selector: 'app-header',
@@ -11,21 +12,18 @@ export class HeaderComponent implements OnInit {
   @Output()
   public logout: EventEmitter<any> = new EventEmitter();
 
-  public user: User | null = null;
+  public user: LoginData | null = null;
+  public isLogged = false;
 
   constructor(
-    private userService: UserService
+    private store: Store<AppState>
   ) {}
 
   public ngOnInit() {
-    this.userService.newUserSubject
-    .subscribe((user) => {
-      this.user = user;
+    this.store.subscribe((appState: AppState) => {
+      this.isLogged = appState.auth.loggedIn;
+      this.user = appState.auth.user ? appState.auth.user : null;
     });
-  }
-
-  public get notLogged() {
-    return this.user === null || this.user === undefined;
   }
 
   public handleLogoutClick(): void {
@@ -34,9 +32,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public get userLogin() {
-    return this.notLogged
-      ? ''
-      : this.user.login;
+    return this.isLogged
+      ? this.user.login
+      : '';
   }
 }
 

@@ -17,12 +17,6 @@ export class AuthService {
     return this.http.post<any>(url, body);
   }
 
-  public isAuthenticated(): boolean {
-    const storedObject = localStorage.getItem('loggedToken');
-    const token = JSON.parse(storedObject);
-    return !!token;
-  }
-
   public login(userCredentials: UserCredentials): Observable<any> {
     localStorage.setItem('loggedToken', JSON.stringify('userInfo'));
     const body = userCredentials;
@@ -32,9 +26,15 @@ export class AuthService {
   public saveToken(token: string): void {
     localStorage.setItem('loggedToken', JSON.stringify(token));
   }
+  public saveUserLogin(login: string): void {
+    localStorage.setItem('loggedUser', JSON.stringify(login));
+  }
 
-  public logout(): void {
+  public removeToken(): void {
     localStorage.setItem('loggedToken', JSON.stringify(null));
+  }
+  public removeUserLogin(): void {
+    localStorage.setItem('loggedUser', JSON.stringify(null));
   }
 
 }

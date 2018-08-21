@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -34,6 +36,7 @@ import { AuthGuard } from 'app/services/auth.guard.service';
 import { CoursesService } from 'app/services/courses.service';
 import { NotFoundComponent } from 'app/core/not-found/not-found.component';
 import { AuthInterceptor } from 'app/services/auth.interceptor';
+import { reducers } from 'app/store';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,11 @@ import { AuthInterceptor } from 'app/services/auth.interceptor';
     FormsModule,
     Angular2FontawesomeModule,
     ModalModule.forRoot(),
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    })
   ],
   providers: [
     AuthService,

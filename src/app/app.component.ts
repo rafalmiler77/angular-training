@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/services/auth.service';
+import { UserService } from 'app/services/user.service';
 import { User } from 'app/entities/user.model';
 
 @Component({
@@ -12,17 +12,17 @@ export class AppComponent implements OnInit {
   public isAuthenticated;
 
   constructor(
-    private authService: AuthService
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
+    this.isAuthenticated = this.userService.isAuthenticated();
   }
 
   public loggedOut() {
     this.user = null;
-    this.authService.logout();
-    this.isAuthenticated = this.authService.isAuthenticated();
+    this.userService.logout();
+    this.isAuthenticated = this.userService.isAuthenticated();
   }
 
   public newLoginSuccess() {

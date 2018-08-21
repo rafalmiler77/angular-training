@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import { CoursesService } from 'app/services/courses.service';
 import { Course } from 'app/entities/course.model';
+import { AppState } from 'app/store';
 
 @Component({
   selector: 'app-edit-course',
@@ -24,6 +26,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private coursesService: CoursesService,
+    private store: Store<AppState>,
     private router: Router,
     private location: Location
   ) { }
@@ -31,9 +34,10 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.activatedRoute.params.subscribe((data): void => {
       this.courseId = +data.id;
-      this.subscription = this.coursesService.getCourse(this.courseId)
-        .subscribe((courseDetails: Course[]): void => {
-          const [details] = courseDetails;
+      this.subscription = this.store
+        .subscribe((appState: AppState): void => {
+          const courses: Course[] = appState.courses.courses;
+          const details = courses.find(course => course.id === this.courseId);
           this.course = details;
           this.name = details.name;
           this.description = details.description;

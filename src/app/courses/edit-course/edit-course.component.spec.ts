@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
 
 import { DurationPipe } from 'app/pipes';
 import { CoursesService } from 'app/services/courses.service';
@@ -24,6 +25,14 @@ class CoursesServiceMock {
 class ActivatedRouteStub {
   public params = Observable.of({ id: '1' });
 }
+class StoreMock {
+  public dispatch(_: any): void {
+    return;
+  }
+  public subscribe(_: any): Observable<Course[]> {
+    return Observable.of(coursesMock);
+  }
+}
 
 describe('EditCourseComponent', () => {
   let component: EditCourseComponent;
@@ -44,6 +53,7 @@ describe('EditCourseComponent', () => {
         { provide: Router, useValue: routerMock },
         { provide: Location, useValue: locationMock },
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
+        { provide: Store, useClass: StoreMock }
       ]
     })
     .compileComponents();
