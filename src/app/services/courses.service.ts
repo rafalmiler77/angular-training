@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Course, CourseClass } from 'app/entities/course.model';
+import { Author2 } from 'app/entities/author2.model';
 
 @Injectable()
 export class CoursesService {
@@ -10,6 +11,11 @@ export class CoursesService {
   constructor(
     private http: HttpClient
   ) { }
+
+  public getAllAuthors(): Observable<Author2[]> {
+    const url = `http://localhost:3004/authors`;
+    return this.http.get<Author2[]>(url);
+  }
 
   public getCourses(start: number = 0, count: number = 1): Observable<Course[]> {
     const url = `http://localhost:3004/courses?start=${start}&count=${count}`;
@@ -29,7 +35,6 @@ export class CoursesService {
 
   public createCourse({...props}): Observable<Course> {
     const newCourse = new CourseClass(props);
-    console.log('newCourse created', newCourse)
     const body = newCourse;
     const url = `http://localhost:3004/courses`;
     return this.http.post<Course>(url, body);

@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DurationPipe } from 'app/pipes';
-import { DurationInputComponent } from './duration-input.component';
+import { AuthorsInputComponent } from './authors-input.component';
+import { AuthorsValidatorDirective } from 'app/directives';
 
-describe('DurationInputComponent', () => {
-  let component: DurationInputComponent;
-  let fixture: ComponentFixture<DurationInputComponent>;
+describe('AuthorsInputComponent', () => {
+  let component: AuthorsInputComponent;
+  let fixture: ComponentFixture<AuthorsInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DurationInputComponent, DurationPipe ],
+      declarations: [ AuthorsInputComponent, AuthorsValidatorDirective ],
       imports: [
         FormsModule,
         ReactiveFormsModule
@@ -19,7 +19,7 @@ describe('DurationInputComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DurationInputComponent);
+    fixture = TestBed.createComponent(AuthorsInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

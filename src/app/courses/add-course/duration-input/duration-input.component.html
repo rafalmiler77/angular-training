@@ -1,5 +1,6 @@
 <div class="form-group">
-  <label for="duration">Duration</label>
-  <input type="number" class="form-control" name="duration" #durationInput (keyup)="onKey(durationInput.value)" required />
-  <span>{{durationInput.value | duration}}</span>
+  <label for="duration">Duration *Required</label>
+  <input type="text" class="form-control" name="duration" [formControl]="duration" (keyup)="handleKeyUp()" appValidateIfInteger/>
+  <span *ngIf="isValid">{{duration.value | duration}}</span>
+  <span *ngIf="!isValid">Provide only numbers</span>
 </div>

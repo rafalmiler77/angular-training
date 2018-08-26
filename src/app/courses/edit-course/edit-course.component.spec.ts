@@ -1,6 +1,6 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Course } from 'app/entities/course.model';
 import { coursesMock } from 'app/entities/coursesMock';
+import { Author2 } from 'app/entities/author2.model';
 
 class CoursesServiceMock {
   public getCourse(): Observable<Course[]> {
@@ -19,6 +20,9 @@ class CoursesServiceMock {
    }
   public updateCourse(): Observable<Course> {
     return Observable.of(coursesMock[1]);
+   }
+  public getAllAuthors(): Observable<Author2[]> {
+    return Observable.of([]);
    }
 }
 
@@ -45,7 +49,8 @@ describe('EditCourseComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ EditCourseComponent, DurationPipe ],
       imports: [
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
@@ -62,6 +67,8 @@ describe('EditCourseComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditCourseComponent);
     component = fixture.componentInstance;
+    component.authorsInputComponent = jasmine.createSpy('isValid');
+    component.durationInputComponent = jasmine.createSpy('isValid');
     fixture.detectChanges();
   });
 

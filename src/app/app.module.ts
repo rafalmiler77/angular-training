@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -26,9 +26,17 @@ import {
   EditCourseComponent
  } from 'app/courses';
 
-import { DurationPipe, OrderByPipe, FilterByPipe } from 'app/pipes';
-import { HighlightFreshDirective } from 'app/directives/highlight-fresh.directive';
-import { HideDirective } from 'app/directives/hide.directive';
+import {
+  DurationPipe,
+  FilterByPipe,
+  OrderByPipe
+} from 'app/pipes';
+import {
+  AuthorsValidatorDirective,
+  DurationValidatorDirective,
+  HideDirective,
+  HighlightFreshDirective
+ } from 'app/directives';
 
 import { AuthService } from 'app/services/auth.service';
 import { UserService } from 'app/services/user.service';
@@ -37,6 +45,7 @@ import { CoursesService } from 'app/services/courses.service';
 import { NotFoundComponent } from 'app/core/not-found/not-found.component';
 import { AuthInterceptor } from 'app/services/auth.interceptor';
 import { reducers } from 'app/store';
+import { AuthorsInputComponent } from './courses/add-course/authors-input/authors-input.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +59,8 @@ import { reducers } from 'app/store';
     HomeComponent,
     LoginComponent,
     ToolboxComponent,
+    AuthorsValidatorDirective,
+    DurationValidatorDirective,
     HideDirective,
     HighlightFreshDirective,
     DurationPipe,
@@ -59,11 +70,13 @@ import { reducers } from 'app/store';
     DateInputComponent,
     DurationInputComponent,
     NotFoundComponent,
+    AuthorsInputComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     Angular2FontawesomeModule,
     ModalModule.forRoot(),
     RouterModule.forRoot(ROUTES),

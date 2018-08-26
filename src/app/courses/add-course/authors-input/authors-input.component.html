@@ -1,0 +1,27 @@
+<label for="newAuthor">Authors *Required</label>
+<form class="form-group authors" [formGroup]="authors" (ngSubmit)="handleSubmit()">
+  <div class="authors__tags" formArrayName="names">
+    <ng-container *ngFor="let name of names.controls; let i=index">
+      <ng-container [formGroupName]="i">
+        <div class="authors__tags--item">
+          <span>{{name.value.authorsName}}</span>
+          <i class="fa fa-times fa-2 authors__tags--remove" aria-hidden="true" (click)="handleRemove(i)"></i>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="authors__input--container">
+    <input
+      class="form-control authors__input"
+      [ngClass]="{'authors__input--invalid': !isValid}"
+      name="newAuthor"
+      type="text"
+      formControlName="newAuthor"
+      [appValidateAuthors]="allAuthors"/>
+    <div class="authors__completer">
+      <ng-container *ngFor="let author of allAuthorsFiltered">
+        <div class="authors__completer--item" (click)="handleAllAuthorsClick(author.id)">{{author.name}}</div>
+      </ng-container>
+    </div>
+  </div>
+</form>

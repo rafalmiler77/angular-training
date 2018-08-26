@@ -1,14 +1,19 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
 
 import { AddCourseComponent } from './add-course.component';
 import { CoursesService } from 'app/services/courses.service';
-import { Router } from '@angular/router';
+import { Author2 } from 'app/entities/author2.model';
 
 class CoursesServiceMock {
   public createCourse() {
   }
+  public getAllAuthors(): Observable<Author2[]> {
+    return Observable.of([]);
+   }
 }
 
 describe('AddCourseComponent', () => {
@@ -20,9 +25,10 @@ describe('AddCourseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AddCourseComponent ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [NO_ERRORS_SCHEMA],
       imports: [
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
       ],
       providers: [
         { provide: CoursesService, useClass: CoursesServiceMock },
@@ -35,6 +41,9 @@ describe('AddCourseComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddCourseComponent);
     component = fixture.componentInstance;
+
+    component.name = new FormControl('');
+    component.description = new FormControl('');
     fixture.detectChanges();
   });
 

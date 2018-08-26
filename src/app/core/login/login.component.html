@@ -4,14 +4,14 @@
   </div>
 
   <div class="">
-    <form name="form" (ngSubmit)="handleLoginClick()">
+    <form [formGroup]="user" name="form" (ngSubmit)="handleLoginClick()">
       <div class="form-group">
         <label for="login">Login</label>
-        <input type="text" class="form-control" name="login" [(ngModel)]="login" required />
+        <input type="text" class="form-control" name="login" [formControl]="login" required />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" [(ngModel)]="password" required />
+        <input type="password" class="form-control" name="password" [formControl]="password" required />
       </div>
     </form>
   </div>

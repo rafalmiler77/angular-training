@@ -1,0 +1,45 @@
+.authors {
+  display: flex;
+}
+.authors__tags {
+  display: inline-block;
+  background: white;
+  min-height: 38px;
+  line-height: 18px;
+  padding: 9px 3px;
+}
+.authors__tags--item {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 0 10px;
+  font-size: 12px;
+  background: lightgray;
+}
+.authors__tags--remove {
+  cursor: pointer
+}
+.authors__input {
+  display: inline-block;
+  width: unset;
+  border: none;
+  min-height: 38px;
+}
+.authors__input--container {
+  display: inline-block;
+  position: relative;
+}
+.authors__input--invalid {
+  outline: 2px red solid;
+}
+.authors__completer {
+  position: absolute;
+  width: 100%;
+  margin-top: 2px;
+}
+.authors__completer--item {
+  background: lightgray;
+}
+.authors__completer--item:hover {
+  background: gray;
+  cursor: pointer
+}

@@ -8,3 +8,7 @@ input {
 span {
   padding-left: 10px;
 }
+.ng-invalid {
+  outline: 2px red solid;
+}
+

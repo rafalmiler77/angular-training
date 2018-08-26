@@ -9,18 +9,18 @@
     <form name="form" (ngSubmit)="handleSubmitClick()">
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" name="title" [(ngModel)]="name" required />
+        <input type="text" class="form-control" name="title" [formControl]="name" required />
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea type="text" class="form-control" name="description" [(ngModel)]="description" required ></textarea>
+        <textarea type="text" class="form-control" name="description" [formControl]="description" required ></textarea>
       </div>
       <app-date-input></app-date-input>
       <app-duration-input (durationChange)="durationChanged($event)"></app-duration-input>
-      <div class="form-group">
-        <label for="authors">Authors</label>
-        <input type="text" class="form-control" name="authors" [(ngModel)]="authors" disabled />
-      </div>
+      <app-authors-input
+        [allAuthors]="allAuthors"
+        (authorsChange)="authorsChanged($event)">
+      </app-authors-input>
     </form>
   </div>
 

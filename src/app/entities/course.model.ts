@@ -1,3 +1,8 @@
+export interface Author {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
 export interface Course {
   id: number;
   name: string;
@@ -5,6 +10,7 @@ export interface Course {
   length: number;
   description: string;
   isTopRated: boolean;
+  authors?: Author[];
 }
 
 export class CourseClass implements Course {

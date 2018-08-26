@@ -20,7 +20,7 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   public courses: Course[] = [];
   public start = 0;
   public count = 5;
-  private subscriptons: Subscription[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private coursesService: CoursesService,
@@ -41,28 +41,28 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   ngOnDestroy() {
-    this.subscriptons.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
   public storeCoursesList(): void {
     const coursesSubscription = this.coursesService.getCourses(this.start, this.count)
     .subscribe((courses) => {
       this.store.dispatch(new GetCourses(courses));
     });
-    this.subscriptons.push(coursesSubscription);
+    this.subscriptions.push(coursesSubscription);
   }
   public getStoredCoursesList(): void {
     const storeSubscription = this.store
     .subscribe((appState) => {
       this.courses = appState.courses.courses;
     });
-    this.subscriptons.push(storeSubscription);
+    this.subscriptions.push(storeSubscription);
   }
   public searchInCourses(textFragment: string): void {
     const searchSubscription = this.coursesService.searchInCourses(textFragment)
     .subscribe((courses) => {
       this.store.dispatch(new GetCourses(courses));
     });
-    this.subscriptons.push(searchSubscription);
+    this.subscriptions.push(searchSubscription);
   }
   public edited(id: number) {
     this.router.navigate([`/courses/${id}`]);
@@ -78,7 +78,7 @@ export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
     .subscribe((courses) => {
       this.store.dispatch(new LoadMoreCourses(courses));
     });
-    this.subscriptons.push(loadMoreSubscription);
+    this.subscriptions.push(loadMoreSubscription);
   }
 
   public get more(): boolean {

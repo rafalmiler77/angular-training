@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'app/services/auth.service';
 import { UserService } from 'app/services/user.service';
 
@@ -12,12 +13,16 @@ import { LogIn } from 'app/store/actions/auth.actions';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @Output()
   public newLoginSuccess: EventEmitter<any> = new EventEmitter();
 
-  public login = '';
-  public password = '';
+  public login = new FormControl('');
+  public password = new FormControl('');
+  public user = new FormGroup({
+    login: this.login,
+    password: this.password
+  });
 
   constructor(
     private authService: AuthService,
@@ -26,12 +31,9 @@ export class LoginComponent implements OnInit {
     private store: Store<AuthState>
   ) { }
 
-  ngOnInit() {
-  }
   public handleLoginClick() {
-    const user = { login: this.login, password: this.password};
-    this.store.dispatch(new LogIn({login: this.login}));
-    this.authService.login(user).subscribe((res) => {
+    this.store.dispatch(new LogIn({login: this.login.value}));
+    this.authService.login(this.user.value).subscribe((res) => {
       if (res && res.token) {
         this.authService.saveToken(res.token);
         this.newLoginSuccess.emit();

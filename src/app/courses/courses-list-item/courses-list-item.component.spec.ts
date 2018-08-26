@@ -7,7 +7,7 @@ import { DurationPipe } from 'app/pipes/duration.pipe';
 import { CoursesListItemComponent } from './courses-list-item.component';
 import { coursesMock } from 'app/entities/coursesMock';
 import { Course } from 'app/entities/course.model';
-import { HideDirective } from 'app/directives/hide.directive';
+import { HideDirective } from 'app/directives';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
